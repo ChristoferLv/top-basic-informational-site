@@ -1,27 +1,61 @@
-import { createServer } from 'node:http';
-import fs from 'node:fs';
+import express from "express";
+const app = express();
 
-const server = createServer();
 
-server.on('request', (request, res) => {
-    res.writeHead(200, { 'Content-Type': "text/html" });
-    if (request.method == 'GET') {
-        let data = fs.readFileSync('./404.html', 'utf8');
-        switch (request.url) {
-            case "/":
-                data = fs.readFileSync('./index.html', 'utf8');
-                break;
-            case "/about":
-                data = fs.readFileSync('./about.html', 'utf8');
-                break;
-            case "/contact-me":
-                data = fs.readFileSync('./contact-me.html', 'utf8');
-                break;
+app.get("/", (req, res) => {
+    res.set('Content-Type', "text/html");
+    const fileName = 'index.html';
+    res.status(200).sendFile(fileName, { root: "." }, (err) => {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
         }
+    });
+});
 
-        res.end(data);
-    }
+app.get("/about", (req, res) => {
+    res.set('Content-Type', "text/html");
+    const fileName = 'about.html';
+    res.status(200).sendFile(fileName, { root: "." }, (err) => {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
+});
+
+app.get("/contact-me", (req, res) => {
+    res.set('Content-Type', "text/html");
+    const fileName = 'contact-me.html';
+    res.status(200).sendFile(fileName, { root: "." }, (err) => {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
+});
+
+app.use("", (req, res) => {
+    res.set('Content-Type', "text/html");
+    const fileName = '404.html';
+    res.status(200).sendFile(fileName, { root: "." }, (err) => {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
 });
 
 
-server.listen(8000, () => { console.log("Server Started"); });
+
+const PORT = 3000;
+app.listen(PORT, (error) => {
+    if (error) {
+        throw error;
+    }
+    console.log(`Server listening on port ${PORT}!`);
+});
