@@ -56,6 +56,10 @@ node index.js
 - Express
 - HTML5
 
+## Visualization
+
+<img width="1910" height="915" alt="basic_informational_screenshot" src="https://github.com/user-attachments/assets/812bea7a-baf7-458d-adf1-a533de24eb10" />
+
 ---
 
 Project developed following: [The Odin Project - Basic Informational Site](https://www.theodinproject.com/lessons/nodejs-basic-informational-site)
